@@ -8,6 +8,7 @@ class Gis:
 
     def __init__(self):
         self.cities = []  # This is the list of all the available cities
+        self.city_selections = []
         with open('gis.dat', 'r') as gisfile:
             gisfile.seek(110)
             tokens = re.split(", |[\s+\[\],]", gisfile.read())
@@ -38,6 +39,8 @@ class Gis:
         pass
 
     def selectAllCities(self):
+        self.city_selections.clear()
+        self.city_selections = range(0, len(self.cities), 1)
         pass
 
     def selectEdges(self, lowerBound, upperBound):
@@ -50,7 +53,8 @@ class Gis:
         pass
 
     def printCities(self, attribute, choice):
-        pass
+        for i in self.city_selections:
+            print(self.cities[i].name)
 
     def printEdges(self):
         pass
@@ -65,4 +69,5 @@ class Gis:
         pass
 
 x = Gis()
-print("success!")
+x.selectAllCities()
+x.printCities("Something", "other")
