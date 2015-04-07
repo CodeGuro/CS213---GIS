@@ -13,22 +13,25 @@ class Gis:
             tokens = re.split(", |[\s+\[\],]", gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
-                name = tokens[i+0]
-                state = tokens[i+1]
-                lat = tokens[i+2]
-                lon = tokens[i+3]
-                pop = tokens[i+4]
-                i += 5
-                if i == 205:
-                    print('Stop here!')
+                delim = ""
+                name = ""
+                while not tokens[i+1].isnumeric():
+                    name += delim + tokens[i+0]
+                    delim = " "
+                    i += 1
+                state = tokens[i+0]
+                lat = tokens[i+1]
+                lon = tokens[i+2]
+                pop = tokens[i+3]
+                i += 4
                 current_city = City(name, state, lat, lon, pop)
                 for city in self.cities:
-                    city.appendDistanceTo(name, int(tokens[i]))
+                    distance = int(tokens[i])
+                    current_city.appendDistanceTo(city.name, distance)
+                    city.appendDistanceTo(name, distance)
                     i += 1
                 current_city.appendDistanceTo(name, 0)
                 self.cities.append(current_city)
-
-            pass
         print('success!')
 
     def selectCities(self, attribute, lowerBound, upperBound):
@@ -62,3 +65,4 @@ class Gis:
         pass
 
 x = Gis()
+print("success!")
