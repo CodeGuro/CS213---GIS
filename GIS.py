@@ -31,8 +31,10 @@ class Gis:
     def selectCities(self, attribute, lowerBound, upperBound):
         callbacks = {
             'population': self.__selectCitiesByPopulation,
-            'name': self.__selectCitiesByName
-        }
+            'name': self.__selectCitiesByName,
+            'latitude': self.__selectCitiesByLatitude,
+            'longitude': self.__selectCitiesByLongitude,
+            }
 
         callbacks[attribute](lowerBound, upperBound)
 
@@ -47,6 +49,18 @@ class Gis:
         for city in self.city_selections.copy():
             regex_pattern = '^[' + lowerBound + '-' + upperBound + ']'
             if len(re.findall(regex_pattern, city.name)) == 0:
+                self.city_selections.remove(city)
+
+    def __selectCitiesByLatitude(self, lowerBound, upperBound):
+        print('called __selectCitiesByLatitude, lb: ' + str(lowerBound) + ', ub:' + str(upperBound))
+        for city in self.city_selections.copy():
+            if not lowerBound <= city.latitude <= upperBound:
+                self.city_selections.remove(city)
+
+    def __selectCitiesByLongitude(self, lowerBound, upperBound):
+        print('called __selectCitiesByLongitude, lb: ' + str(lowerBound) + ', ub:' + str(upperBound))
+        for city in self.city_selections.copy():
+            if not lowerBound <= city.longitude <= upperBound:
                 self.city_selections.remove(city)
 
     def selectAllCities(self):
@@ -95,7 +109,10 @@ print("\n")
 x.selectCities('population', 1000, 15000)
 x.printCities()
 print("\n")
-x.selectCities('name', 'V', 'V')
+x.selectCities('name', 'R', 'T')
+x.printCities()
+print("\n")
+x.selectCities('latitude', 3000, 4000)
 x.printCities()
 print('success!')
 exit()
