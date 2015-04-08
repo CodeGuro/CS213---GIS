@@ -38,15 +38,15 @@ class Gis:
 
     def __selectCitiesByPopulation(self, lowerBound, upperBound):
         print('called __selectCitiesByPopulation, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
-        for city in self.cities:
-            if lowerBound <= city.population <= upperBound:
-                self.city_selections.add(city)
+        for city in self.city_selections.copy():
+            if not lowerBound <= city.population <= upperBound:
+                self.city_selections.remove(city)
 
     def __selectCitiesByName(self, lowerBound, upperBound):
         print('called __selectCitiesByName, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
-        for city in self.cities:
-            if lowerBound <= city.name <= upperBound:
-                self.city_selections.add(city)
+        for city in self.city_selections:
+            if not lowerBound <= city.name <= upperBound:
+                self.city_selections.remove(city)
 
     def selectAllCities(self):
         for city in self.cities:
@@ -90,10 +90,8 @@ class Gis:
 x = Gis()
 x.selectAllCities()
 x.printCities()
-x.unselectAllCities()
 print("\n")
-x.selectCities('population', 100000, 500000)
+x.selectCities('population', 1000, 15000)
 x.printCities()
-x.unselectAllCities()
 print('success!')
 exit()
