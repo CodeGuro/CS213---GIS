@@ -43,9 +43,10 @@ class Gis:
                 self.city_selections.remove(city)
 
     def __selectCitiesByName(self, lowerBound, upperBound):
-        print('called __selectCitiesByName, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
-        for city in self.city_selections:
-            if not lowerBound <= city.name <= upperBound:
+        print('called __selectCitiesByName, lb: ' + lowerBound + ', upperBound: ' + upperBound)
+        for city in self.city_selections.copy():
+            regex_pattern = '^[' + lowerBound + '-' + upperBound + ']'
+            if len(re.findall(regex_pattern, city.name)) == 0:
                 self.city_selections.remove(city)
 
     def selectAllCities(self):
@@ -92,6 +93,9 @@ x.selectAllCities()
 x.printCities()
 print("\n")
 x.selectCities('population', 1000, 15000)
+x.printCities()
+print("\n")
+x.selectCities('name', 'V', 'V')
 x.printCities()
 print('success!')
 exit()
