@@ -10,22 +10,15 @@ class Gis:
         self.cities = []  # This is the list of all the available cities
         self.city_selections = []
         with open('gis.dat', 'r') as gisfile:
-            gisfile.seek(110)
-            tokens = re.split(", |[\s+\[\],]", gisfile.read())
+            tokens = re.findall('[A-Za-z\- ]+, [A-Za-z\- ]*|[0-9]+', gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
-                delim = ""
-                name = ""
-                while not tokens[i+1].isnumeric():
-                    name += delim + tokens[i+0]
-                    delim = " "
-                    i += 1
-                state = tokens[i+0]
+                name = tokens[i+0]
                 lat = tokens[i+1]
                 lon = tokens[i+2]
                 pop = tokens[i+3]
                 i += 4
-                current_city = City(name, state, lat, lon, pop)
+                current_city = City(name, lat, lon, pop)
                 for city in self.cities:
                     distance = int(tokens[i])
                     current_city.appendDistanceTo(city.name, distance)
