@@ -8,15 +8,16 @@ class Gis:
 
     def __init__(self):
         self.cities = []  # This is the list of all the available cities
-        self.city_selections = []
+        self.city_selections = set()
+        self.edge_selections = set()
         with open('gis.dat', 'r') as gisfile:
             tokens = re.findall('[A-Za-z\- ]+, [A-Za-z\- ]*|[0-9]+', gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
                 name = tokens[i+0]
-                lat = tokens[i+1]
-                lon = tokens[i+2]
-                pop = tokens[i+3]
+                lat = int(tokens[i+1])
+                lon = int(tokens[i+2])
+                pop = int(tokens[i+3])
                 i += 4
                 current_city = City(name, lat, lon, pop)
                 for city in self.cities:
@@ -26,15 +27,33 @@ class Gis:
                     i += 1
                 current_city.appendDistanceTo(name, 0)
                 self.cities.append(current_city)
-        print('success!')
 
     def selectCities(self, attribute, lowerBound, upperBound):
-        pass
+        callbacks = {
+            'population': self.__selectCitiesByPopulation,
+            'name': self.__selectCitiesByName
+        }
+
+        callbacks[attribute](lowerBound, upperBound)
+
+    def __selectCitiesByPopulation(self, lowerBound, upperBound):
+        print('called __selectCitiesByPopulation, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
+        for city in self.cities:
+            if lowerBound <= city.population <= upperBound:
+                self.city_selections.add(city)
+
+    def __selectCitiesByName(self, lowerBound, upperBound):
+        print('called __selectCitiesByName, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
+        for city in self.cities:
+            if lowerBound <= city.name <= upperBound:
+                self.city_selections.add(city)
 
     def selectAllCities(self):
+        for city in self.cities:
+            self.city_selections.add(city)
+
+    def unselectAllCities(self):
         self.city_selections.clear()
-        self.city_selections = range(0, len(self.cities), 1)
-        pass
 
     def selectEdges(self, lowerBound, upperBound):
         pass
@@ -42,12 +61,19 @@ class Gis:
     def selectAllEdges(self):
         pass
 
+    def unselectAllEdges(self):
+        self.edge_selections.clear()
+
     def makeGraph(self):
         pass
 
-    def printCities(self, attribute, choice):
-        for i in self.city_selections:
-            print(self.cities[i].name)
+    def printCities(self, attribute=None, choice=None):
+        if attribute is None:
+            attribute = 'name'
+        if choice is None:
+            choice = 'F'
+        for city in self.city_selections:
+            print(city.name)
 
     def printEdges(self):
         pass
@@ -63,4 +89,11 @@ class Gis:
 
 x = Gis()
 x.selectAllCities()
-x.printCities("Something", "other")
+x.printCities()
+x.unselectAllCities()
+print("\n")
+x.selectCities('population', 100000, 500000)
+x.printCities()
+x.unselectAllCities()
+print('success!')
+exit()
