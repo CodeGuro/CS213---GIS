@@ -98,29 +98,55 @@ class Gis:
 
         callbacks = {
             'name': self.__printCitiesByName,
-            'population': self.__printCitiesByPopulation
+            'state': self.__printCitiesByState,
+            'population': self.__printCitiesByPopulation,
+            'latitude': self.__printCitiesByLatitude,
+            'longitude': self.__printCitiesByLongitude,
         }
         printCB = {
             'F': self.__fullCityPrint,
             'S': self.__shortCityPrint
         }
 
-        callbacks[attribute](printCB[choice])
+        callbacks.get(attribute, self.__printInvalid)(printCB.get(choice, self.__printInvalid))
 
     def __printCitiesByName(self, printCB):
-        for city in self.city_selections:
+
+        sortedCities = sorted(self.city_selections, key=lambda city: city.name)
+
+        for city in sortedCities:
+            printCB(city)
+
+    def __printCitiesByState(self, printCB):
+
+        sortedCities = sorted(self.city_selections, key=lambda city: city.population)
+
+        for city in sortedCities:
             printCB(city)
 
     def __printCitiesByPopulation(self, printCB):
-        city_dict = dict()
-        for city in self.city_selections:
-            city_dict[city.population] = city
 
-        sortedCities = sorted(city_dict.items())
+        sortedCities = sorted(self.city_selections, key=lambda city: city.population)
 
-        for it in sortedCities:
-            city = it[1]
+        for city in sortedCities:
             printCB(city)
+
+    def __printCitiesByLatitude(self, printCB):
+
+        sortedCities = sorted(self.city_selections, key=lambda city: city.latitude)
+
+        for city in sortedCities:
+            printCB(city)
+
+    def __printCitiesByLongitude(self, printCB):
+
+        sortedCities = sorted(self.city_selections, key=lambda city: city.longitude)
+
+        for city in sortedCities:
+            printCB(city)
+
+    def __printInvalid(self, placeholder):
+        print('invalid attribute or choice')
 
     def __fullCityPrint(self, city):
         print(city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population))
@@ -140,6 +166,8 @@ class Gis:
     def minCut(self):
         pass
 
+
+
 x = Gis()
 x.selectAllCities()
 x.printCities('name')
@@ -158,4 +186,6 @@ x.selectCities('state', 'OH')
 x.printCities()
 print("\n")
 x.printCities('population')
+print("\n")
+x.printCities('longitude')
 exit()
