@@ -15,11 +15,12 @@ class Gis:
             i = 0  # iterator
             while i < len(tokens):
                 name = tokens[i+0]
-                lat = int(tokens[i+1])
-                lon = int(tokens[i+2])
-                pop = int(tokens[i+3])
+                lati = int(tokens[i+1])
+                long = int(tokens[i+2])
+                popu = int(tokens[i+3])
+                stat = re.findall('[\w]+$', name)[0]
                 i += 4
-                current_city = City(name, lat, lon, pop)
+                current_city = City(name, stat, lati, long, popu)
                 for city in self.cities:
                     distance = int(tokens[i])
                     current_city.appendDistanceTo(city.name, distance)
@@ -28,12 +29,13 @@ class Gis:
                 current_city.appendDistanceTo(name, 0)
                 self.cities.append(current_city)
 
-    def selectCities(self, attribute, lowerBound, upperBound):
+    def selectCities(self, attribute, lowerBound, upperBound=None):
         callbacks = {
             'population': self.__selectCitiesByPopulation,
             'name': self.__selectCitiesByName,
             'latitude': self.__selectCitiesByLatitude,
             'longitude': self.__selectCitiesByLongitude,
+            'state': self.__selectCitiesByState,
             }
 
         callbacks[attribute](lowerBound, upperBound)
@@ -63,6 +65,12 @@ class Gis:
             if not lowerBound <= city.longitude <= upperBound:
                 self.city_selections.remove(city)
 
+    def __selectCitiesByState(self, state, placeholder):
+        print('called __selectCitiesByState, state: ' + state)
+        for city in self.city_selections.copy():
+            if city.state != state:
+                self.city_selections.remove(city)
+
     def selectAllCities(self):
         for city in self.cities:
             self.city_selections.add(city)
@@ -87,8 +95,38 @@ class Gis:
             attribute = 'name'
         if choice is None:
             choice = 'F'
+
+        callbacks = {
+            'name': self.__printCitiesByName,
+            'population': self.__printCitiesByPopulation
+        }
+        printCB = {
+            'F': self.__fullCityPrint,
+            'S': self.__shortCityPrint
+        }
+
+        callbacks[attribute](printCB[choice])
+
+    def __printCitiesByName(self, printCB):
         for city in self.city_selections:
-            print(city.name)
+            printCB(city)
+
+    def __printCitiesByPopulation(self, printCB):
+        city_dict = dict()
+        for city in self.city_selections:
+            city_dict[city.population] = city
+
+        sortedCities = sorted(city_dict.items())
+
+        for it in sortedCities:
+            city = it[1]
+            printCB(city)
+
+    def __fullCityPrint(self, city):
+        print(city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population))
+
+    def __shortCityPrint(self, city):
+        print(city.name)
 
     def printEdges(self):
         pass
@@ -104,7 +142,7 @@ class Gis:
 
 x = Gis()
 x.selectAllCities()
-x.printCities()
+x.printCities('name')
 print("\n")
 x.selectCities('population', 1000, 15000)
 x.printCities()
@@ -114,5 +152,10 @@ x.printCities()
 print("\n")
 x.selectCities('latitude', 3000, 4000)
 x.printCities()
-print('success!')
+print("\n")
+x.selectAllCities()
+x.selectCities('state', 'OH')
+x.printCities()
+print("\n")
+x.printCities('population')
 exit()
