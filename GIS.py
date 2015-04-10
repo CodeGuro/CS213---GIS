@@ -31,14 +31,34 @@ class Gis:
 
     def selectCities(self, attribute, lowerBound, upperBound=None):
         callbacks = {
-            'population': self.__selectCitiesByPopulation,
-            'name': self.__selectCitiesByName,
-            'latitude': self.__selectCitiesByLatitude,
-            'longitude': self.__selectCitiesByLongitude,
-            'state': self.__selectCitiesByState,
+            'population': lambda city: city.population,
+            'name': lambda city: city.name,
+            'latitude': lambda city: city.latitude,
+            'longitude': lambda city: city.longitude,
+            'state': lambda city: city.state,
             }
 
-        callbacks[attribute](lowerBound, upperBound)
+        regex_pattern = '^[' + str(lowerBound) + '-' + str(upperBound) + ']'
+        numeric_domain = lambda city: (lowerBound <= callbacks[attribute](city) <= upperBound)
+        name_domain = lambda city: not (len(re.findall(regex_pattern, callbacks[attribute](city))) == 0)
+        state_domain = lambda city: city.state == lowerBound
+
+        if attribute not in callbacks:
+            print('invalid attribute')
+            return
+
+        if attribute == 'name':
+            domain_func = name_domain
+        elif attribute == 'state':
+            domain_func = state_domain
+        else:
+            domain_func = numeric_domain
+
+        for city in self.city_selections.copy():
+            if not domain_func(city):
+                self.city_selections.remove(city)
+
+        #  callbacks[attribute](lowerBound, upperBound)
 
     def __selectCitiesByPopulation(self, lowerBound, upperBound):
         print('called __selectCitiesByPopulation, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
