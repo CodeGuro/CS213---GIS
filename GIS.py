@@ -108,7 +108,9 @@ class Gis:
             'S': self.__shortCityPrint
         }
 
-        callbacks.get(attribute, self.__printInvalid)(printCB.get(choice, self.__printInvalid))
+        invalidParam = lambda param: print('invalid attribute or choice')
+
+        callbacks.get(attribute, invalidParam)(printCB.get(choice, invalidParam))
 
     def __printCitiesByName(self, printCB):
 
@@ -144,9 +146,6 @@ class Gis:
 
         for city in sortedCities:
             printCB(city)
-
-    def __printInvalid(self, placeholder):
-        print('invalid attribute or choice')
 
     def __fullCityPrint(self, city):
         print(city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population))
@@ -190,5 +189,5 @@ print("\n")
 x.printCities('longitude')
 print("\n")
 x.selectAllCities()
-x.printCities('population', 'F')
+x.printCities('popultion', 'F')
 exit()
