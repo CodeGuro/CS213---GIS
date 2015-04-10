@@ -96,56 +96,27 @@ class Gis:
         if choice is None:
             choice = 'F'
 
-        callbacks = {
-            'name': self.__printCitiesByName,
-            'state': self.__printCitiesByState,
-            'population': self.__printCitiesByPopulation,
-            'latitude': self.__printCitiesByLatitude,
-            'longitude': self.__printCitiesByLongitude,
+        lambda_procs = {
+            'name': lambda city: city.name,
+            'state': lambda city: city.state,
+            'population': lambda city: city.population,
+            'latitude': lambda city: city.latitude,
+            'longitude': lambda city: city.longitude,
         }
+
         printCB = {
             'F': self.__fullCityPrint,
             'S': self.__shortCityPrint
         }
 
-        invalidParam = lambda param: print('invalid attribute or choice')
+        if (attribute not in lambda_procs) or (choice not in printCB):
+            print('invalid attribute or choice')
+            return
 
-        callbacks.get(attribute, invalidParam)(printCB.get(choice, invalidParam))
+        sorted_cities = sorted(self.city_selections, key=lambda_procs.get(attribute))
 
-    def __printCitiesByName(self, printCB):
-
-        sortedCities = sorted(self.city_selections, key=lambda city: city.name)
-
-        for city in sortedCities:
-            printCB(city)
-
-    def __printCitiesByState(self, printCB):
-
-        sortedCities = sorted(self.city_selections, key=lambda city: city.population)
-
-        for city in sortedCities:
-            printCB(city)
-
-    def __printCitiesByPopulation(self, printCB):
-
-        sortedCities = sorted(self.city_selections, key=lambda city: city.population)
-
-        for city in sortedCities:
-            printCB(city)
-
-    def __printCitiesByLatitude(self, printCB):
-
-        sortedCities = sorted(self.city_selections, key=lambda city: city.latitude)
-
-        for city in sortedCities:
-            printCB(city)
-
-    def __printCitiesByLongitude(self, printCB):
-
-        sortedCities = sorted(self.city_selections, key=lambda city: city.longitude)
-
-        for city in sortedCities:
-            printCB(city)
+        for city in sorted_cities:
+            printCB[choice](city)
 
     def __fullCityPrint(self, city):
         print(city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population))
@@ -189,5 +160,5 @@ print("\n")
 x.printCities('longitude')
 print("\n")
 x.selectAllCities()
-x.printCities('popultion', 'F')
+x.printCities('population', 'F')
 exit()
