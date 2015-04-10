@@ -58,39 +58,6 @@ class Gis:
             if not domain_func(city):
                 self.city_selections.remove(city)
 
-        #  callbacks[attribute](lowerBound, upperBound)
-
-    def __selectCitiesByPopulation(self, lowerBound, upperBound):
-        print('called __selectCitiesByPopulation, lb: ' + str(lowerBound) + ', upperBound: ' + str(upperBound))
-        for city in self.city_selections.copy():
-            if not lowerBound <= city.population <= upperBound:
-                self.city_selections.remove(city)
-
-    def __selectCitiesByName(self, lowerBound, upperBound):
-        print('called __selectCitiesByName, lb: ' + lowerBound + ', upperBound: ' + upperBound)
-        for city in self.city_selections.copy():
-            regex_pattern = '^[' + lowerBound + '-' + upperBound + ']'
-            if len(re.findall(regex_pattern, city.name)) == 0:
-                self.city_selections.remove(city)
-
-    def __selectCitiesByLatitude(self, lowerBound, upperBound):
-        print('called __selectCitiesByLatitude, lb: ' + str(lowerBound) + ', ub:' + str(upperBound))
-        for city in self.city_selections.copy():
-            if not lowerBound <= city.latitude <= upperBound:
-                self.city_selections.remove(city)
-
-    def __selectCitiesByLongitude(self, lowerBound, upperBound):
-        print('called __selectCitiesByLongitude, lb: ' + str(lowerBound) + ', ub:' + str(upperBound))
-        for city in self.city_selections.copy():
-            if not lowerBound <= city.longitude <= upperBound:
-                self.city_selections.remove(city)
-
-    def __selectCitiesByState(self, state, placeholder):
-        print('called __selectCitiesByState, state: ' + state)
-        for city in self.city_selections.copy():
-            if city.state != state:
-                self.city_selections.remove(city)
-
     def selectAllCities(self):
         for city in self.cities:
             self.city_selections.add(city)
