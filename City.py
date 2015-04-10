@@ -1,5 +1,6 @@
 __author__ = 'Tony'
 
+
 # This class is a data structure used to generalize cities for the Gis class
 class City:
 
