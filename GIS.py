@@ -38,14 +38,14 @@ class Gis:
             'state': lambda city: city.state,
             }
 
+        if attribute not in callbacks:
+            print('invalid attribute')
+            return
+
         regex_pattern = '^[' + str(lowerBound) + '-' + str(upperBound) + ']'
         numeric_domain = lambda city: (lowerBound <= callbacks[attribute](city) <= upperBound)
         name_domain = lambda city: not (len(re.findall(regex_pattern, callbacks[attribute](city))) == 0)
         state_domain = lambda city: city.state == lowerBound
-
-        if attribute not in callbacks:
-            print('invalid attribute')
-            return
 
         if attribute == 'name':
             domain_func = name_domain
