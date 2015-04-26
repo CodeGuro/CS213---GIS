@@ -1,6 +1,7 @@
 __author__ = 'Tony'
 
 from City import City
+from Edge import Edge
 import re
 
 
@@ -8,6 +9,7 @@ class Gis:
 
     def __init__(self):
         self.cities = []  # This is the list of all the available cities
+        self.edges = []
         self.city_selections = set()
         self.edge_selections = set()
         with open('gis.dat', 'r') as gisfile:
@@ -23,10 +25,8 @@ class Gis:
                 current_city = City(name, stat, lati, long, popu)
                 for city in self.cities:
                     distance = int(tokens[i])
-                    current_city.appendDistanceTo(city.name, distance)
-                    city.appendDistanceTo(name, distance)
+                    self.edges.append(Edge(current_city.name, city.name, distance))
                     i += 1
-                current_city.appendDistanceTo(name, 0)
                 self.cities.append(current_city)
 
     def selectCities(self, attribute, lowerBound, upperBound=None):
@@ -66,10 +66,13 @@ class Gis:
         self.city_selections.clear()
 
     def selectEdges(self, lowerBound, upperBound):
-        pass
+        for edge in self.edge_selections.copy():
+            if not lowerBound <= edge.distance <= upperBound:
+                self.edge_selections.remove(edge)
 
     def selectAllEdges(self):
-        pass
+        for edge in self.edges:
+            self.edge_selections.add(edge)
 
     def unselectAllEdges(self):
         self.edge_selections.clear()
@@ -112,10 +115,40 @@ class Gis:
         print(city.name)
 
     def printEdges(self):
-        pass
+        for edge in self.edge_selections:
+            print(edge.city1 + '<-->' + edge.city2 + ': ' + str(edge.distance))
 
     def testMinMaxConsDistance(self):
-        pass
+        # We want to Dijkstra's algorithm to find the shortest path between source and destination
+        print('type in the source and destination in the format: sourceCity, sourceState->destCity, destState')
+        user_input = input()
+        tokens = re.findall('[\w]*, [\w]*|[\->< ]+', user_input)
+
+        if len(tokens) != 3:
+            print('invalid input')
+            return
+
+        if '->' in tokens[1]:
+            sourceName = tokens[0]
+            destName = tokens[2]
+        else:
+            sourceName = tokens[2]
+            destName = tokens[1]
+
+        destCity = None
+        sourceCity = None
+        for city in self.city_selections:
+            if sourceName in city.name:
+                sourceCity = city
+            if destName in city.name:
+                destCity = city
+
+        if sourceCity is None:
+            print('source city does not exist in city selections')
+            return
+        if destCity is None:
+            print('destination city does not exist in city selections')
+            return
 
     def tour(self, start):
         pass
@@ -127,6 +160,12 @@ class Gis:
 
 x = Gis()
 x.selectAllCities()
+x.selectAllEdges()
+
+x.testMinMaxConsDistance()
+
+
+x.printEdges()
 x.printCities('name')
 print("\n")
 x.selectCities('population', 1000, 15000)
