@@ -25,7 +25,7 @@ class Gis:
                 current_city = City(name, stat, lati, long, popu)
                 for city in self.cities:
                     distance = int(tokens[i])
-                    self.edges.append(Edge(current_city.name, city.name, distance))
+                    self.edges.append(Edge(current_city, city, distance))
                     i += 1
                 self.cities.append(current_city)
 
@@ -116,7 +116,7 @@ class Gis:
 
     def printEdges(self):
         for edge in self.edge_selections:
-            print(edge.city1 + '<-->' + edge.city2 + ': ' + str(edge.distance))
+            print(edge.city1.name + '<-->' + edge.city2.name + ': ' + str(edge.distance))
 
     def testMinMaxConsDistance(self):
         # We want to Dijkstra's algorithm to find the shortest path between source and destination
@@ -149,6 +149,28 @@ class Gis:
         if destCity is None:
             print('destination city does not exist in city selections')
             return
+
+        visited = []
+        city_dist = {}
+        city_last = {}
+        neighbors = []
+
+        for city in self.city_selections:
+            city_dist[city] = float('inf')
+        city_dist[sourceCity] = 0
+
+        current_city = None
+        while current_city is not sourceCity:
+            current_city = min(city_dist, key=lambda city: city_dist[city])
+            # Calculate distance to all other cities surrounding it
+
+            pass
+        print('finished')
+
+    def _findNeighbors(self, city):
+        neighbors = []
+        for edge in self.edge_selections:
+            pass
 
     def tour(self, start):
         pass
