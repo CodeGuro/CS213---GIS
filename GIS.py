@@ -120,37 +120,44 @@ class Gis:
 
     def testMinMaxConsDistance(self):
         # We want to Dijkstra's algorithm to find the shortest path between source and destination
-        print('type in the source and destination in the format: sourceCity, sourceState->destCity, destState')
-        user_input = input()
-        tokens = re.findall('[\w]*, [\w]*|[\->< ]+', user_input)
+        repeat = True
+        while repeat is not False:
+            print('type in the source and destination in the format: sourceCity, sourceState->destCity, destState')
+            user_input = input()
+            tokens = re.findall('[\w, ]+[\w]+|[\->< ]+', user_input)
 
-        if len(tokens) == 0:
-            return True
-        elif len(tokens) != 3:
-            print('invalid input')
-            return False
+            if len(tokens) == 0:
+                repeat = False
+                continue
+            elif len(tokens) != 3:
+                print('invalid input')
+                continue
 
-        if '->' in tokens[1]:
-            sourceName = tokens[0]
-            destName = tokens[2]
-        else:
-            sourceName = tokens[2]
-            destName = tokens[1]
+            if '->' in tokens[1]:
+                sourceName = tokens[0]
+                destName = tokens[2]
+            else:
+                sourceName = tokens[2]
+                destName = tokens[0]
 
-        destCity = None
-        sourceCity = None
-        for city in self.city_selections:
-            if sourceName in city.name:
-                sourceCity = city
-            if destName in city.name:
-                destCity = city
+            destCity = None
+            sourceCity = None
+            for city in self.city_selections:
+                if sourceName in city.name:
+                    sourceCity = city
+                if destName in city.name:
+                    destCity = city
 
-        if sourceCity is None:
-            print('source city does not exist in city selections')
-            return False
-        if destCity is None:
-            print('destination city does not exist in city selections')
-            return False
+            if sourceCity is None:
+                print('source city does not exist in city selections')
+                continue
+            if destCity is None:
+                print('destination city does not exist in city selections')
+                continue
+
+            self.__dijkstrasAlgorithm(sourceCity, destCity)
+
+    def __dijkstrasAlgorithm(self, sourceCity, destCity):
 
         not_visited = self.city_selections.copy()
         city_dist = {}
@@ -166,7 +173,7 @@ class Gis:
             adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
             if len(adjacent_edges) is 0:
                 print('Destination is impossible with the edges and cities currently selected')
-                return False
+                return
             for edge in adjacent_edges:
                 if edge.city1 is current_city:
                     if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
@@ -185,11 +192,7 @@ class Gis:
             print(city.name)
             city = city_last.get(city)
         print('total distance: ' + str(city_dist[destCity]))
-        return False
-
-    def testMinMaxConDistanceLoop(self):
-        while not self.testMinMaxConsDistance():
-            pass
+        return
 
     def __findAdjacentSelectedEdges(self, city, notVisited):
         neighbors = []
@@ -212,7 +215,7 @@ x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
 
-x.testMinMaxConDistanceLoop()
+x.testMinMaxConsDistance()
 
 x.printEdges()
 x.printCities('name')
