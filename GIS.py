@@ -124,9 +124,11 @@ class Gis:
         user_input = input()
         tokens = re.findall('[\w]*, [\w]*|[\->< ]+', user_input)
 
-        if len(tokens) != 3:
+        if len(tokens) == 0:
+            return True
+        elif len(tokens) != 3:
             print('invalid input')
-            return
+            return False
 
         if '->' in tokens[1]:
             sourceName = tokens[0]
@@ -145,10 +147,10 @@ class Gis:
 
         if sourceCity is None:
             print('source city does not exist in city selections')
-            return
+            return False
         if destCity is None:
             print('destination city does not exist in city selections')
-            return
+            return False
 
         not_visited = self.city_selections.copy()
         city_dist = {}
@@ -159,19 +161,35 @@ class Gis:
         city_dist[sourceCity] = 0
 
         current_city = None
-        while current_city is not sourceCity:
-            current_city = min(city_dist, key=lambda city: city_dist[city])
-            adjacent_edges = self.__findAdjacentSelectedEdges(current_city)
+        while current_city is not destCity:
+            current_city = min(not_visited, key=lambda city: city_dist[city])
+            adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
+            if len(adjacent_edges) is 0:
+                print('Destination is impossible with the edges and cities currently selected')
+                return False
             for edge in adjacent_edges:
                 if edge.city1 is current_city:
                     if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
                         city_dist[edge.city2] = city_dist[current_city] + edge.distance
+                        city_last[edge.city2] = current_city
                 else:
                     if city_dist[edge.city1] > city_dist[current_city] + edge.distance:
                         city_dist[edge.city1] = city_dist[current_city] + edge.distance
+                        city_last[edge.city1] = current_city
+            not_visited.remove(current_city)
 
+        print('printing city trace...')
 
-        print('finished')
+        city = destCity
+        while city is not None:
+            print(city.name)
+            city = city_last.get(city)
+        print('total distance: ' + str(city_dist[destCity]))
+        return False
+
+    def testMinMaxConDistanceLoop(self):
+        while not self.testMinMaxConsDistance():
+            pass
 
     def __findAdjacentSelectedEdges(self, city, notVisited):
         neighbors = []
@@ -194,8 +212,7 @@ x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
 
-x.testMinMaxConsDistance()
-
+x.testMinMaxConDistanceLoop()
 
 x.printEdges()
 x.printCities('name')
