@@ -150,10 +150,9 @@ class Gis:
             print('destination city does not exist in city selections')
             return
 
-        visited = []
+        not_visited = self.city_selections.copy()
         city_dist = {}
         city_last = {}
-        neighbors = []
 
         for city in self.city_selections:
             city_dist[city] = float('inf')
@@ -162,15 +161,26 @@ class Gis:
         current_city = None
         while current_city is not sourceCity:
             current_city = min(city_dist, key=lambda city: city_dist[city])
-            # Calculate distance to all other cities surrounding it
+            adjacent_edges = self.__findAdjacentSelectedEdges(current_city)
+            for edge in adjacent_edges:
+                if edge.city1 is current_city:
+                    if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
+                        city_dist[edge.city2] = city_dist[current_city] + edge.distance
+                else:
+                    if city_dist[edge.city1] > city_dist[current_city] + edge.distance:
+                        city_dist[edge.city1] = city_dist[current_city] + edge.distance
 
-            pass
+
         print('finished')
 
-    def _findNeighbors(self, city):
+    def __findAdjacentSelectedEdges(self, city, notVisited):
         neighbors = []
         for edge in self.edge_selections:
-            pass
+            if edge.city1 is city and edge.city2 in notVisited:
+                neighbors.append(edge)
+            elif edge.city2 is city and edge.city1 in notVisited:
+                neighbors.append(edge)
+        return neighbors
 
     def tour(self, start):
         pass
