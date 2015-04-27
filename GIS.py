@@ -209,8 +209,6 @@ class Gis:
     def minCut(self):
         pass
 
-
-
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
