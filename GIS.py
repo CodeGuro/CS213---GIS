@@ -3,6 +3,8 @@ __author__ = 'Tony'
 from City import City
 from Edge import Edge
 import re
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 class Gis:
@@ -78,7 +80,25 @@ class Gis:
         self.edge_selections.clear()
 
     def makeGraph(self):
-        pass
+        graph = nx.Graph()
+
+        cityLabels = {}
+        edgeLabels = {}
+        for city in self.city_selections:
+            graph.add_node(city)
+            cityLabels[city] = city.name
+
+        for edge in self.edge_selections:
+            if (edge.city1 in self.city_selections) and (edge.city2 in self.city_selections):
+                graph.add_edge(edge.city1, edge.city2)
+                edgeLabels[(edge.city1, edge.city2)] = edge.distance
+
+        pos = nx.shell_layout(graph)
+
+        nx.draw(graph, pos)
+        # nx.draw_networkx_edge_labels(graph, pos, edge_labels=edgeLabels, font_size=30)
+        # nx.draw_networkx_labels(graph, pos, labels=cityLabels, font_size=30,)
+        plt.show()
 
     def printCities(self, attribute=None, choice=None):
         if attribute is None:
@@ -209,9 +229,13 @@ class Gis:
     def minCut(self):
         pass
 
+
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
+x.selectCities('state', 'CA')
+
+x.makeGraph()
 
 x.testMinMaxConsDistance()
 
