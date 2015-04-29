@@ -45,16 +45,13 @@ class Gis:
             return
 
         regex_pattern = '^[' + str(lowerBound) + '-' + str(upperBound) + ']'
-        numeric_domain = lambda city: (lowerBound <= callbacks[attribute](city) <= upperBound)
-        name_domain = lambda city: not (len(re.findall(regex_pattern, callbacks[attribute](city))) == 0)
-        state_domain = lambda city: city.state == lowerBound
+        domain_callbacks = {
+            'name': lambda city: not (len(re.findall(regex_pattern, callbacks[attribute](city))) == 0),
+            'state': lambda city: city.state == lowerBound,
+            'numeric': lambda city: (lowerBound <= callbacks[attribute](city) <= upperBound)
+        }
 
-        if attribute == 'name':
-            domain_func = name_domain
-        elif attribute == 'state':
-            domain_func = state_domain
-        else:
-            domain_func = numeric_domain
+        domain_func = domain_callbacks.get(attribute, domain_callbacks['numeric'])
 
         for city in self.city_selections.copy():
             if not domain_func(city):
@@ -233,16 +230,15 @@ class Gis:
     def tour(self, start):
         pass
 
-
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
-x.selectCities('state', 'CA')
-x.selectEdges(0, 1500)
+#x.selectCities('state', 'CA')
+#x.selectEdges(0, 1500)
 
-x.makeGraph()
+#x.makeGraph()
 
-x.testMinMaxConsDistance()
+#x.testMinMaxConsDistance()
 
 x.printEdges()
 x.printCities('name')
