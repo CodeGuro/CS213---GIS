@@ -233,9 +233,6 @@ class Gis:
     def tour(self, start):
         pass
 
-    def minCut(self):
-        pass
-
 
 x = Gis()
 x.selectAllCities()
