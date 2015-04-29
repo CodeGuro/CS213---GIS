@@ -96,8 +96,8 @@ class Gis:
         pos = nx.shell_layout(graph)
 
         nx.draw(graph, pos)
-        # nx.draw_networkx_edge_labels(graph, pos, edge_labels=edgeLabels, font_size=30)
-        # nx.draw_networkx_labels(graph, pos, labels=cityLabels, font_size=30,)
+        nx.draw_networkx_edge_labels(graph, pos, edge_labels=edgeLabels, font_size=10)
+        nx.draw_networkx_labels(graph, pos, labels=cityLabels, font_size=10,)
         plt.show()
 
     def printCities(self, attribute=None, choice=None):
@@ -190,19 +190,20 @@ class Gis:
         current_city = None
         while current_city is not destCity:
             current_city = min(not_visited, key=lambda city: city_dist[city])
-            adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
-            if len(adjacent_edges) is 0:
+            if city_dist[current_city] == float('inf'):
                 print('Destination is impossible with the edges and cities currently selected')
                 return
-            for edge in adjacent_edges:
-                if edge.city1 is current_city:
-                    if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
-                        city_dist[edge.city2] = city_dist[current_city] + edge.distance
-                        city_last[edge.city2] = current_city
-                else:
-                    if city_dist[edge.city1] > city_dist[current_city] + edge.distance:
-                        city_dist[edge.city1] = city_dist[current_city] + edge.distance
-                        city_last[edge.city1] = current_city
+            adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
+            if len(adjacent_edges) is not 0:
+                for edge in adjacent_edges:
+                    if edge.city1 is current_city:
+                        if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
+                            city_dist[edge.city2] = city_dist[current_city] + edge.distance
+                            city_last[edge.city2] = current_city
+                    else:
+                        if city_dist[edge.city1] > city_dist[current_city] + edge.distance:
+                            city_dist[edge.city1] = city_dist[current_city] + edge.distance
+                            city_last[edge.city1] = current_city
             not_visited.remove(current_city)
 
         print('printing city trace...')
@@ -233,9 +234,10 @@ class Gis:
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
-x.selectCities('state', 'CA')
+#x.selectCities('state', 'CA')
+#x.selectEdges(0, 1500)
 
-x.makeGraph()
+#x.makeGraph()
 
 x.testMinMaxConsDistance()
 
