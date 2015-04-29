@@ -208,10 +208,16 @@ class Gis:
 
         print('printing city trace...')
 
+        path = []
         city = destCity
         while city is not None:
-            print(city.name)
-            city = city_last.get(city)
+            prev_city = city_last.get(city)
+            if prev_city is not None:
+                path.insert(0, (prev_city, city, city_dist[city] - city_dist[prev_city]))
+            city = prev_city
+
+        for tup in path:
+            print(tup[0].name + ' --> ' + tup[1].name + ': dis: ' + str(tup[2]))
         print('total distance: ' + str(city_dist[destCity]))
         return
 
@@ -234,10 +240,10 @@ class Gis:
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
-#x.selectCities('state', 'CA')
-#x.selectEdges(0, 1500)
+x.selectCities('state', 'CA')
+x.selectEdges(0, 1500)
 
-#x.makeGraph()
+x.makeGraph()
 
 x.testMinMaxConsDistance()
 
