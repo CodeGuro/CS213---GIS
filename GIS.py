@@ -219,13 +219,13 @@ class Gis:
         return
 
     def __findAdjacentSelectedEdges(self, city, notVisited):
-        neighbors = []
+        adjacent = []
         for edge in self.edge_selections:
             if edge.city1 is city and edge.city2 in notVisited:
-                neighbors.append(edge)
+                adjacent.append(edge)
             elif edge.city2 is city and edge.city1 in notVisited:
-                neighbors.append(edge)
-        return neighbors
+                adjacent.append(edge)
+        return adjacent
 
     def tour(self, start):
         pass
@@ -233,12 +233,7 @@ class Gis:
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
-#x.selectCities('state', 'CA')
-#x.selectEdges(0, 1500)
-
-#x.makeGraph()
-
-#x.testMinMaxConsDistance()
+x.testMinMaxConsDistance()
 
 x.printEdges()
 x.printCities('name')
