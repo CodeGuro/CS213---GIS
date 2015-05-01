@@ -8,3 +8,6 @@ class Edge:
         self.city1 = city1
         self.city2 = city2
         self.distance = distance
+
+    def getStr(self):
+        return self.city1.name + '<-->' + self.city2.name + ': ' + str(self.distance)

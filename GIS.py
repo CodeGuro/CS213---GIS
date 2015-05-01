@@ -37,8 +37,7 @@ class Gis:
                 if city in self.city_selections:
                     print(name + ' is already selected')
                 else:
-                    string = city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population)
-                    print('city found: ' + string)
+                    print('city found: ' + city.getFullStr())
                     self.city_selections.add(city)
                 return
         print(name + ' is not in the database')
@@ -96,7 +95,7 @@ class Gis:
                 if edge in self.edge_selections:
                     print('edge already selected')
                 else:
-                    print('edge found: ' + edge.city1.name + '<-->' + edge.city2.name + ': ' + str(edge.distance))
+                    print('edge found: ' + edge.getStr())
                     self.edge_selections.add(edge)
                 return
         # One of the cities do not exist
@@ -146,8 +145,8 @@ class Gis:
         }
 
         printCB = {
-            'F': self.__fullCityPrint,
-            'S': self.__shortCityPrint
+            'F': City.fullPrint,
+            'S': City.shortPrint
         }
 
         if (attribute not in lambda_procs) or (choice not in printCB):
@@ -159,15 +158,9 @@ class Gis:
         for city in sorted_cities:
             printCB[choice](city)
 
-    def __fullCityPrint(self, city):
-        print(city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population))
-
-    def __shortCityPrint(self, city):
-        print(city.name)
-
     def printEdges(self):
         for edge in self.edge_selections:
-            print(edge.city1.name + '<-->' + edge.city2.name + ': ' + str(edge.distance))
+            print(edge.getStr())
 
     def testMinMaxConsDistance(self):
         # We want to Dijkstra's algorithm to find the shortest path between source and destination
@@ -315,7 +308,7 @@ x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
 x.selectEdges(1000, 2000)
-x.tour('Youngstown, OH')
+# x.tour('Youngstown, OH')
 x.printEdges()
 x.printCities('name')
 print("\n")
