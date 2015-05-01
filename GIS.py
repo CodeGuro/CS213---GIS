@@ -14,13 +14,13 @@ class Gis:
         self.edges = []
         self.city_selections = set()
         self.edge_selections = set()
-        with open('gis.dat', 'r') as gisfile:
+        with open('gis test.dat', 'r') as gisfile:
             tokens = re.findall('[A-Za-z\- ]+, [A-Za-z\- ]*|[0-9]+', gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
                 name = tokens[i+0]
-                lati = int(tokens[i+1])
-                long = int(tokens[i+2])
+                lati = float(tokens[i+1]) / 100.0
+                long = float(tokens[i+2]) / 100.0
                 popu = int(tokens[i+3])
                 stat = re.findall('[\w]+$', name)[0]
                 i += 4
@@ -30,6 +30,18 @@ class Gis:
                     self.edges.append(Edge(current_city, city, distance))
                     i += 1
                 self.cities.append(current_city)
+
+    def selectSingleCity(self, name):
+        for city in self.cities:
+            if name == city.name:
+                if city in self.city_selections:
+                    print(name + ' is already selected')
+                else:
+                    string = city.name + ' [' + str(city.latitude) + ',' + str(city.longitude) + '], ' + str(city.population)
+                    print('city found: ' + string)
+                    self.city_selections.add(city)
+                return
+        print(name + ' is not in the database')
 
     def selectCities(self, attribute, lowerBound, upperBound=None):
         callbacks = {
@@ -68,6 +80,28 @@ class Gis:
         for edge in self.edge_selections.copy():
             if not lowerBound <= edge.distance <= upperBound:
                 self.edge_selections.remove(edge)
+
+    def selectSingleEdge(self, cityNameState1, cityNameState2):
+        city1 = None
+        city2 = None
+        for city in self.cities:
+            if city.name == cityNameState1:
+                city1 = city
+            if city.name == cityNameState2:
+                city2 = city
+
+        check = lambda edge: (edge.city1 is city1 and edge.city2 is city2) or (edge.city1 is city2 and edge.city2 is city1)
+        for edge in self.edges:
+            if check(edge):
+                if edge in self.edge_selections:
+                    print('edge already selected')
+                else:
+                    print('edge found: ' + edge.city1.name + '<-->' + edge.city2.name + ': ' + str(edge.distance))
+                    self.edge_selections.add(edge)
+                return
+        # One of the cities do not exist
+        missing = cityNameState1 if city1 is None else cityNameState2
+        print(missing + ' is not a city in the database')
 
     def selectAllEdges(self):
         for edge in self.edges:
@@ -233,18 +267,17 @@ class Gis:
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
-x.testMinMaxConsDistance()
-
 x.printEdges()
 x.printCities('name')
 print("\n")
+x.makeGraph()
 x.selectCities('population', 1000, 15000)
 x.printCities()
 print("\n")
 x.selectCities('name', 'R', 'T')
 x.printCities()
 print("\n")
-x.selectCities('latitude', 3000, 4000)
+x.selectCities('latitude', 30, 40)
 x.printCities()
 print("\n")
 x.selectAllCities()
