@@ -14,7 +14,7 @@ class Gis:
         self.edges = []
         self.city_selections = set()
         self.edge_selections = set()
-        with open('gis test.dat', 'r') as gisfile:
+        with open('gis.dat', 'r') as gisfile:
             tokens = re.findall('[A-Za-z\- ]+, [A-Za-z\- ]*|[0-9]+', gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
@@ -262,11 +262,60 @@ class Gis:
         return adjacent
 
     def tour(self, start):
-        pass
+        start_city = None
+        for city in self.city_selections:
+            if start == city.name:
+                start_city = city
+        if start_city not in self.city_selections:
+            print(start_city.name + 'is not selected')
+            return
+        path = [(start_city, 0)]
+        not_visited = self.city_selections.copy()
+        current_city = start_city
+        while len(not_visited) > 0:
+            adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
+            not_visited.remove(current_city)
+            if len(adjacent_edges) == 0:
+                break
+            next_city = None
+            next_dist = float("inf")
+            for edge in adjacent_edges:
+                if edge.distance < next_dist:
+                    next_city = edge.city1 if current_city is not edge.city1 else edge.city2
+                    next_dist = edge.distance
+            path.append((next_city, next_dist))
+            current_city = next_city
+
+        # All cities have been visited, find an edge between current city and start city
+        last_edge_l = self.__findAdjacentSelectedEdges(current_city, {start_city})
+        if (len(not_visited) > 0) or (len(last_edge_l) == 0):
+            print('tour not possible from' + start)
+            return
+        path.append((start_city, last_edge_l[0].distance))
+        total_distance = 0
+        iterator = 0
+        string = ''
+        delim = ''
+        for tup in path:
+            iterator += 1
+            total_distance += tup[1]
+            string += delim + tup[0].name
+            if iterator % 4 == 0:
+                delim = '-->\n'
+            else:
+                delim = '-->'
+        print(string)
+        print('total distance: ' + str(total_distance))
+
+
+
+
 
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
+x.selectEdges(1000, 2000)
+x.tour('Youngstown, OH')
 x.printEdges()
 x.printCities('name')
 print("\n")
