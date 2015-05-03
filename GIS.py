@@ -300,10 +300,6 @@ class Gis:
         print(string)
         print('total distance: ' + str(total_distance))
 
-
-
-
-
 x = Gis()
 x.selectAllCities()
 x.selectAllEdges()
