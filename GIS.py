@@ -282,7 +282,7 @@ class Gis:
         # All cities have been visited, find an edge between current city and start city
         last_edge_l = self.__findAdjacentSelectedEdges(current_city, {start_city})
         if (len(not_visited) > 0) or (len(last_edge_l) == 0):
-            print('tour not possible from' + start)
+            print('tour not possible from ' + start)
             return
         path.append((start_city, last_edge_l[0].distance))
         total_distance = 0
@@ -301,9 +301,17 @@ class Gis:
         print('total distance: ' + str(total_distance))
 
 x = Gis()
-x.selectAllCities()
-x.selectAllEdges()
-x.selectEdges(1000, 2000)
+x.selectSingleCity('Youngstown, OH')
+x.selectSingleCity('Yankton, SD')
+x.selectSingleCity('Yakima, WA')
+x.selectSingleCity('Worcester, MA')
+x.selectSingleEdge('Youngstown, OH', 'Yankton, SD')
+x.selectSingleEdge('Yankton, SD', 'Yakima, WA')
+x.selectSingleEdge('Yakima, WA', 'Worcester, MA')
+x.selectSingleEdge('Youngstown, OH', 'Worcester, MA')
+x.makeGraph()
+x.tour('Youngstown, OH')
+
 # x.tour('Youngstown, OH')
 x.printEdges()
 x.printCities('name')
