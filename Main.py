@@ -10,8 +10,8 @@ class Main:
 
         delim = '\n*************************************'
         print('#### EXPERIMENT 1 ####')
-        print('g_system.printCities()')
-        g_system.printCities()
+        print('g_system.printCities(\'name\', \'S\')')
+        g_system.printCities('name', 'S')
 
         print(delim)
         print('# print full display')
@@ -21,17 +21,17 @@ class Main:
         print(delim)
         print('#### EXPERIMENT 2 ####')
         print('# select all cities with latitudes between 40N and 50N'
-              '# and longitudes between 85W and 130W.')
+              '\n# and longitudes between 85W and 130W.')
         g_system.selectCities('latitude', 40, 50)
         g_system.selectCities('longitude', 85, 130)
         print('Population distribution of cities with latitudes between 40N and 50N'
-              'and longitudes between 85W and 130W')
+              '\nand longitudes between 85W and 130W')
         g_system.printCities('population', 'F')
 
         print(delim)
         print('#### EXPERIMENT 3 ####')
         print('# print the most populated states in increasing'
-              'order of population')
+              '\norder of population')
         g_system.printCities('population', 'F')
 
         print(delim)
@@ -42,8 +42,8 @@ class Main:
         print(delim)
         print('#### EXPERIMENT 5 ####')
         print('# print TSP tour starting from Yakima, WA, with'
-              '# exactly 4 cities on each line except possibly the'
-              '# last line.')
+              '\n# exactly 4 cities on each line except possibly the'
+              '\n# last line.')
         print('g_system.selectAllCities()')
         print('g_system.selectAllEdges()')
         print('g_system.tour(\'Yakima, WA\')')
@@ -59,3 +59,5 @@ class Main:
         print(delim)
         print('This concludes all of the experiments')
 
+main = Main()
+main.main()
