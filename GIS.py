@@ -177,7 +177,7 @@ class Gis:
         for city in sorted_cities:
             printCB[choice](city)
 
-    # Print teh currently selected edges
+    # Print the currently selected edges
     def printEdges(self):
         for edge in self.edge_selections:
             print(edge.getStr())
@@ -337,41 +337,3 @@ class Gis:
                 delim = '-->'
         print(string)
         print('total distance: ' + str(total_distance))
-
-x = Gis()
-x.selectSingleCity('Youngstown, OH')
-x.selectSingleCity('Yankton, SD')
-x.selectSingleCity('Yakima, WA')
-x.selectSingleCity('Worcester, MA')
-x.selectSingleEdge('Youngstown, OH', 'Yankton, SD')
-x.selectSingleEdge('Yankton, SD', 'Yakima, WA')
-x.selectSingleEdge('Yakima, WA', 'Worcester, MA')
-x.selectSingleEdge('Youngstown, OH', 'Worcester, MA')
-x.makeGraph()
-x.tour('Youngstown, OH')
-
-# x.tour('Youngstown, OH')
-x.printEdges()
-x.printCities('name')
-print("\n")
-x.makeGraph()
-x.selectCities('population', 1000, 15000)
-x.printCities()
-print("\n")
-x.selectCities('name', 'R', 'T')
-x.printCities()
-print("\n")
-x.selectCities('latitude', 30, 40)
-x.printCities()
-print("\n")
-x.selectAllCities()
-x.selectCities('state', 'OH')
-x.printCities()
-print("\n")
-x.printCities('population')
-print("\n")
-x.printCities('longitude')
-print("\n")
-x.selectAllCities()
-x.printCities('population', 'F')
-exit()
