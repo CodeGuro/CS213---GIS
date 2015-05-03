@@ -9,12 +9,15 @@ import matplotlib.pyplot as plt
 
 class Gis:
 
+    # Define the default constructor
     def __init__(self):
+        # This code is responsible for reading from the GisFile
         self.cities = []  # This is the list of all the available cities
         self.edges = []
         self.city_selections = set()
         self.edge_selections = set()
         with open('gis.dat', 'r') as gisfile:
+            # Parse from the file and generate tokens
             tokens = re.findall('[A-Za-z\- ]+, [A-Za-z\- ]*|[0-9]+', gisfile.read())
             i = 0  # iterator
             while i < len(tokens):
@@ -31,6 +34,7 @@ class Gis:
                     i += 1
                 self.cities.append(current_city)
 
+    # add a single city to the selected list
     def selectSingleCity(self, name):
         for city in self.cities:
             if name == city.name:
@@ -42,7 +46,9 @@ class Gis:
                 return
         print(name + ' is not in the database')
 
+    # Create a new constraint on the currently selected cities
     def selectCities(self, attribute, lowerBound, upperBound=None):
+        # callbacks reflects the attribute
         callbacks = {
             'population': lambda city: city.population,
             'name': lambda city: city.name,
@@ -54,7 +60,7 @@ class Gis:
         if attribute not in callbacks:
             print('invalid attribute')
             return
-
+        # Regex pattern for state, must be one letter
         regex_pattern = '^[' + str(lowerBound) + '-' + str(upperBound) + ']'
         domain_callbacks = {
             'name': lambda city: not (len(re.findall(regex_pattern, callbacks[attribute](city))) == 0),
@@ -62,24 +68,29 @@ class Gis:
             'numeric': lambda city: (lowerBound <= callbacks[attribute](city) <= upperBound)
         }
 
+        # default numeric domain (for safety)
         domain_func = domain_callbacks.get(attribute, domain_callbacks['numeric'])
 
         for city in self.city_selections.copy():
             if not domain_func(city):
                 self.city_selections.remove(city)
 
+    # Select all available cities
     def selectAllCities(self):
         for city in self.cities:
             self.city_selections.add(city)
 
+    # Clear the city selections
     def unselectAllCities(self):
         self.city_selections.clear()
 
+    # Create a new constraint on the currently selected Edges
     def selectEdges(self, lowerBound, upperBound):
         for edge in self.edge_selections.copy():
             if not lowerBound <= edge.distance <= upperBound:
                 self.edge_selections.remove(edge)
 
+    # Select a single edge between two cities
     def selectSingleEdge(self, cityNameState1, cityNameState2):
         city1 = None
         city2 = None
@@ -102,40 +113,47 @@ class Gis:
         missing = cityNameState1 if city1 is None else cityNameState2
         print(missing + ' is not a city in the database')
 
+    # Select all available edges
     def selectAllEdges(self):
         for edge in self.edges:
             self.edge_selections.add(edge)
 
+    # Clear the edge selections
     def unselectAllEdges(self):
         self.edge_selections.clear()
 
+    # Draw the graph (warning: will not look pretty if too many vertices are selected)
     def makeGraph(self):
         graph = nx.Graph()
 
+        # Label the cities
         cityLabels = {}
         edgeLabels = {}
         for city in self.city_selections:
             graph.add_node(city)
             cityLabels[city] = city.name
 
+        # Label the edges
         for edge in self.edge_selections:
             if (edge.city1 in self.city_selections) and (edge.city2 in self.city_selections):
                 graph.add_edge(edge.city1, edge.city2)
                 edgeLabels[(edge.city1, edge.city2)] = edge.distance
 
+        # Do the drawing
         pos = nx.shell_layout(graph)
-
         nx.draw(graph, pos)
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edgeLabels, font_size=10)
         nx.draw_networkx_labels(graph, pos, labels=cityLabels, font_size=10,)
         plt.show()
 
+    # Print the currently selected cities: choice=(F:full, S:short)
     def printCities(self, attribute=None, choice=None):
         if attribute is None:
             attribute = 'name'
         if choice is None:
             choice = 'F'
 
+        # lambda_procs reflects the attribute
         lambda_procs = {
             'name': lambda city: city.name,
             'state': lambda city: city.state,
@@ -153,36 +171,44 @@ class Gis:
             print('invalid attribute or choice')
             return
 
+        # Elegantly sort by the attribute
         sorted_cities = sorted(self.city_selections, key=lambda_procs.get(attribute))
 
         for city in sorted_cities:
             printCB[choice](city)
 
+    # Print teh currently selected edges
     def printEdges(self):
         for edge in self.edge_selections:
             print(edge.getStr())
 
+    # Minimize the maximum distance between two cities
     def testMinMaxConsDistance(self):
-        # We want to Dijkstra's algorithm to find the shortest path between source and destination
+        # Repeatedly ask user for input until they quit (by giving no input)
         repeat = True
         while repeat is not False:
             print('type in the source and destination in the format: sourceCity, sourceState->destCity, destState')
+
+            # Parse the user input into tokens
             user_input = input()
             tokens = re.findall('[\w, ]+[\w]+|[\->< ]+', user_input)
 
-            if len(tokens) == 0:
+            if len(tokens) == 0:  # No input, quit
                 repeat = False
                 continue
-            elif len(tokens) != 3:
+            elif len(tokens) != 3:  # Not enough input, repeat
                 print('invalid input')
                 continue
 
-            if '->' in tokens[1]:
+            if '->' in tokens[1]:  # source -> destination
                 sourceName = tokens[0]
                 destName = tokens[2]
-            else:
+            elif '<-' in tokens[1]:  # destination <- source
                 sourceName = tokens[2]
                 destName = tokens[0]
+            else:
+                print('invalid input')
+                continue
 
             destCity = None
             sourceCity = None
@@ -199,27 +225,33 @@ class Gis:
                 print('destination city does not exist in city selections')
                 continue
 
+            # The fun starts here
             self.__dijkstrasAlgorithm(sourceCity, destCity)
 
+    # Dijkstra's Algorithm used to find shortest possible path between a pair of vertices
     def __dijkstrasAlgorithm(self, sourceCity, destCity):
 
         not_visited = self.city_selections.copy()
         city_dist = {}
         city_last = {}
 
+        # Assign infinity to every city, except the starting city
         for city in self.city_selections:
             city_dist[city] = float('inf')
         city_dist[sourceCity] = 0
 
+        # Begin the loop, start with the smallest city possible, remove it from 'not_visited' list, update vals, repeat
+        # Until the destination has been found. Dijkstra's algorithm guarantees it will be the shortest path possible
         current_city = None
         while current_city is not destCity:
             current_city = min(not_visited, key=lambda city: city_dist[city])
-            if city_dist[current_city] == float('inf'):
+            if city_dist[current_city] == float('inf'): # if true, sourceCity must be in a disconnected component
                 print('Destination is impossible with the edges and cities currently selected')
                 return
             adjacent_edges = self.__findAdjacentSelectedEdges(current_city, not_visited)
             if len(adjacent_edges) is not 0:
                 for edge in adjacent_edges:
+                    # Replace path to adjacent city with current path, if it is shorter
                     if edge.city1 is current_city:
                         if city_dist[edge.city2] > city_dist[current_city] + edge.distance:
                             city_dist[edge.city2] = city_dist[current_city] + edge.distance
@@ -228,10 +260,9 @@ class Gis:
                         if city_dist[edge.city1] > city_dist[current_city] + edge.distance:
                             city_dist[edge.city1] = city_dist[current_city] + edge.distance
                             city_last[edge.city1] = current_city
-            not_visited.remove(current_city)
+            not_visited.remove(current_city)  # update the not_visited cities
 
         print('printing city trace...')
-
         path = []
         city = destCity
         while city is not None:
@@ -245,6 +276,7 @@ class Gis:
         print('total distance: ' + str(city_dist[destCity]))
         return
 
+    # Utility function used to find adjacent edges between single city and non-visited vertices using selected edges
     def __findAdjacentSelectedEdges(self, city, notVisited):
         adjacent = []
         for edge in self.edge_selections:
@@ -254,7 +286,9 @@ class Gis:
                 adjacent.append(edge)
         return adjacent
 
+    # Uses Nearest Neighbor algorithm to compute output for the traveling salesman problem
     def tour(self, start):
+        # Make sur ethe start city actually exists in the selections
         start_city = None
         for city in self.city_selections:
             if start == city.name:
@@ -262,6 +296,8 @@ class Gis:
         if start_city not in self.city_selections:
             print(start_city.name + 'is not selected')
             return
+
+        # Begin the hamiltonian circuit starting from the source: start_city
         path = [(start_city, 0)]
         not_visited = self.city_selections.copy()
         current_city = start_city
@@ -284,7 +320,9 @@ class Gis:
         if (len(not_visited) > 0) or (len(last_edge_l) == 0):
             print('tour not possible from ' + start)
             return
-        path.append((start_city, last_edge_l[0].distance))
+        path.append((start_city, last_edge_l[0].distance))  # path becomes a circuit here
+
+        # Begin printing the circuit trace
         total_distance = 0
         iterator = 0
         string = ''
