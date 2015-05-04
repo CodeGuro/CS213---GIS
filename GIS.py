@@ -376,9 +376,3 @@ class Gis:
                 delim = '-->'
         print(string)
         print('total distance: ' + str(total_distance))
-
-g_system = Gis()
-g_system.selectAllCities()
-g_system.selectAllEdges()
-g_system.printPopulatedStates(3)
-g_system.printPopulationDistr(30000)
