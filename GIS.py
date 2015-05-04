@@ -5,6 +5,7 @@ from Edge import Edge
 import re
 import networkx as nx
 import matplotlib.pyplot as plt
+from math import floor
 
 
 class Gis:
@@ -297,9 +298,22 @@ class Gis:
                 break
             print(state + ' ' + str(popStates[state]))
 
-    # print population distribution
-    def printPopulationDistr(self, num=0):
-        pass
+    # print population distribution with the given stride (default: 20000)
+    def printPopulationDistr(self, stride=20000):
+
+        distribs = []
+        for city in self.city_selections:
+            idx = floor(city.population / stride)
+            while len(distribs) < idx + 2:
+                distribs.append(0)
+            distribs[idx] += 1
+            if city.population % stride == 0:
+                distribs[idx+1] += 1
+
+        it = 0
+        for numCities in distribs:
+            print('[' + str(stride * it) + ', ' + str(stride * (it+1)) + ']: ' + str(numCities))
+            it += 1
 
     # Utility function used to find adjacent edges between single city and non-visited vertices using selected edges
     def __findAdjacentSelectedEdges(self, city, notVisited):
@@ -367,3 +381,4 @@ g_system = Gis()
 g_system.selectAllCities()
 g_system.selectAllEdges()
 g_system.printPopulatedStates(3)
+g_system.printPopulationDistr(30000)
