@@ -276,6 +276,31 @@ class Gis:
         print('total distance: ' + str(city_dist[destCity]))
         return
 
+    # Print n most populated cities
+    def printPopulatedStates(self, numStates=50):
+
+        # sort the cities by population
+        popStates = {}
+
+        # add the cities to the list in order of n most populated, decreasing order of population
+        for city in self.city_selections:
+            if city.state not in popStates:
+                popStates[city.state] = 0
+            popStates[city.state] += city.population
+
+        mostPopStates = sorted(popStates, key=lambda str: popStates[str], reverse=True)
+
+        iterator = 0
+        for state in mostPopStates:
+            iterator += 1
+            if iterator > numStates:
+                break
+            print(state + ' ' + str(popStates[state]))
+
+    # print population distribution
+    def printPopulationDistr(self, num=0):
+        pass
+
     # Utility function used to find adjacent edges between single city and non-visited vertices using selected edges
     def __findAdjacentSelectedEdges(self, city, notVisited):
         adjacent = []
@@ -337,3 +362,8 @@ class Gis:
                 delim = '-->'
         print(string)
         print('total distance: ' + str(total_distance))
+
+g_system = Gis()
+g_system.selectAllCities()
+g_system.selectAllEdges()
+g_system.printPopulatedStates(3)
