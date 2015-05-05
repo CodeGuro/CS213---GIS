@@ -47,6 +47,13 @@ class Gis:
                 return
         print(name + ' is not in the database')
 
+    # remove a single city by name from selected list
+    def removeSingleCity(self, name):
+        for city in self.city_selections.copy():
+            if city.name == name:
+                self.city_selections.remove(city)
+                break
+
     # Create a new constraint on the currently selected cities
     def selectCities(self, attribute, lowerBound, upperBound=None):
         # callbacks reflects the attribute
@@ -109,6 +116,29 @@ class Gis:
                 else:
                     print('edge found: ' + edge.getStr())
                     self.edge_selections.add(edge)
+                return
+        # One of the cities do not exist
+        missing = cityNameState1 if city1 is None else cityNameState2
+        print(missing + ' is not a city in the database')
+
+    # Remove a single edge
+    def removeSingleEdge(self, cityNameState1, cityNameState2):
+        city1 = None
+        city2 = None
+        for city in self.cities:
+            if city.name == cityNameState1:
+                city1 = city
+            if city.name == cityNameState2:
+                city2 = city
+
+        check = lambda edge: (edge.city1 is city1 and edge.city2 is city2) or (edge.city1 is city2 and edge.city2 is city1)
+        for edge in self.edges:
+            if check(edge):
+                if edge in self.edge_selections:
+                    print('edge found: ' + edge.getStr())
+                    self.edge_selections.remove(edge)
+                else:
+                    print('edge \'' + edge.getStr() + '\' not selected')
                 return
         # One of the cities do not exist
         missing = cityNameState1 if city1 is None else cityNameState2
