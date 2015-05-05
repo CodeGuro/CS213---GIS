@@ -333,7 +333,7 @@ class Gis:
             if start == city.name:
                 start_city = city
         if start_city not in self.city_selections:
-            print(start_city.name + 'is not selected')
+            print(start + ' is not selected')
             return
 
         # Begin the hamiltonian circuit starting from the source: start_city
