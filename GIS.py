@@ -79,6 +79,9 @@ class Gis:
         # default numeric domain (for safety)
         domain_func = domain_callbacks.get(attribute, domain_callbacks['numeric'])
 
+        if len(self.city_selections) == 0:
+            print('no cities selected')
+
         for city in self.city_selections.copy():
             if not domain_func(city):
                 self.city_selections.remove(city)
@@ -94,6 +97,9 @@ class Gis:
 
     # Create a new constraint on the currently selected Edges
     def selectEdges(self, lowerBound, upperBound):
+        if len(self.edge_selections) == 0:
+            print('no edges selected')
+            
         for edge in self.edge_selections.copy():
             if not lowerBound <= edge.distance <= upperBound:
                 self.edge_selections.remove(edge)
