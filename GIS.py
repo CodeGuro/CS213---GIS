@@ -29,10 +29,16 @@ class Gis:
                 stat = re.findall('[\w]+$', name)[0]
                 i += 4
                 current_city = City(name, stat, lati, long, popu)
+                distances = []
                 for city in self.cities:
                     distance = int(tokens[i])
-                    self.edges.append(Edge(current_city, city, distance))
+                    distances.append(distance)
                     i += 1
+                distances.reverse()
+                nCity = 0
+                for city in self.cities:
+                    self.edges.append(Edge(current_city, city, distances[nCity]))
+                    nCity += 1
                 self.cities.append(current_city)
 
     # add a single city to the selected list
@@ -99,7 +105,7 @@ class Gis:
     def selectEdges(self, lowerBound, upperBound):
         if len(self.edge_selections) == 0:
             print('no edges selected')
-            
+
         for edge in self.edge_selections.copy():
             if not lowerBound <= edge.distance <= upperBound:
                 self.edge_selections.remove(edge)
@@ -348,7 +354,8 @@ class Gis:
 
         it = 0
         for numCities in distribs:
-            print('[' + str(stride * it) + ', ' + str(stride * (it+1)) + ']: ' + str(numCities))
+            if numCities != 0:
+                print('[' + str(stride * it) + ', ' + str(stride * (it+1)) + ']: ' + str(numCities))
             it += 1
 
     # Utility function used to find adjacent edges between single city and non-visited vertices using selected edges
