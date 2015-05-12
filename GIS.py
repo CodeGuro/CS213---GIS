@@ -225,8 +225,8 @@ class Gis:
         for edge in self.edge_selections:
             print(edge.getStr())
 
-    # Minimize the maximum distance between two cities
-    def testMinMaxConsDistance(self):
+    # Find shortest path
+    def findShortestPath(self):
         # Repeatedly ask user for input until they quit (by giving no input)
         repeat = True
         while repeat is not False:
@@ -314,10 +314,79 @@ class Gis:
                 path.insert(0, (prev_city, city, city_dist[city] - city_dist[prev_city]))
             city = prev_city
 
+        maxLeap = 0
         for tup in path:
             print(tup[0].name + ' --> ' + tup[1].name + ': dis: ' + str(tup[2]))
+            if tup[2] > maxLeap:
+                maxLeap = tup[2]
         print('total distance: ' + str(city_dist[destCity]))
+        print('max leap distance: ' + str(maxLeap))
         return
+
+    # Minimize the maximum distance between two cities
+    def testMinMaxConsDistance(self):
+
+        # Repeatedly ask user for input until they quit (by giving no input)
+        repeat = True
+        while repeat is not False:
+            print('type in the source and destination in the format: sourceCity, sourceState->destCity, destState')
+
+            # Parse the user input into tokens
+            user_input = input()
+            tokens = re.findall('[\w, ]+[\w]+|[\->< ]+', user_input)
+
+            if len(tokens) == 0:  # No input, quit
+                repeat = False
+                continue
+            elif len(tokens) != 3:  # Not enough input, repeat
+                print('invalid input')
+                continue
+
+            if '->' in tokens[1]:  # source -> destination
+                sourceName = tokens[0]
+                destName = tokens[2]
+            elif '<-' in tokens[1]:  # destination <- source
+                sourceName = tokens[2]
+                destName = tokens[0]
+            else:
+                print('invalid input')
+                continue
+
+            destCity = None
+            sourceCity = None
+            for city in self.city_selections:
+                if sourceName in city.name:
+                    sourceCity = city
+                if destName in city.name:
+                    destCity = city
+
+            if sourceCity is None:
+                print('source city does not exist in city selections')
+                continue
+            if destCity is None:
+                print('destination city does not exist in city selections')
+                continue
+
+            cityToComponent = {}
+            for city in self.city_selections:
+                cityToComponent[city] = city
+
+            citiesCopy = self.city_selections.copy()
+            sortedEdges = sorted(self.edge_selections.copy(), key=lambda edge: edge.distance)
+            minSpanTreeEdges = set()
+
+            while self.__connectedComponentCount(cityToComponent) > 1 and len(sortedEdges) > 0:
+                addingEdge = sortedEdges[0]
+                if cityToComponent[addingEdge.city1] is not cityToComponent[addingEdge.city2]:
+                    cityToComponent = self.__changeComponentName(cityToComponent, cityToComponent[addingEdge.city1], cityToComponent[addingEdge.city2])
+                    minSpanTreeEdges.add(addingEdge)
+                del sortedEdges[0]
+
+            edgeSelectionsCopy = self.edge_selections.copy()
+            self.edge_selections = minSpanTreeEdges
+            self.__dijkstrasAlgorithm(sourceCity, destCity)
+            self.edge_selections = edgeSelectionsCopy
+            self.makeGraph()
 
     # Print n most populated cities
     def printPopulatedStates(self, numStates=50):
@@ -367,6 +436,22 @@ class Gis:
             elif edge.city2 is city and edge.city1 in notVisited:
                 adjacent.append(edge)
         return adjacent
+
+    # find the connected component count
+    def __connectedComponentCount(self, components):
+        unique_components = set()
+
+        for city in components:
+            unique_components.add(components[city])
+
+        return len(unique_components)
+
+    # change component name of source to dest
+    def __changeComponentName(self, components, dest, source):
+        for city in components:
+            if components[city] is source:
+                components[city] = dest
+        return components
 
     # Uses Nearest Neighbor algorithm to compute output for the traveling salesman problem
     def tour(self, start):

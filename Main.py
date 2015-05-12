@@ -39,6 +39,10 @@ class Main:
         print('g_system.testMinMaxConsDistance')
         g_system.testMinMaxConsDistance()
 
+        g_system.selectAllEdges()
+        g_system.selectAllCities()
+        g_system.testMinMaxConsDistance()
+
         print(delim)
         print('#### EXPERIMENT 5 ####')
         print('# print TSP tour starting from Yakima, WA, with'
