@@ -1,6 +1,6 @@
 __author__ = 'Tony'
 
-from GIS import Gis
+from Gis import Gis
 
 class Main:
     def main(self):
