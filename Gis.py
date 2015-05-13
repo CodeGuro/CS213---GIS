@@ -386,7 +386,6 @@ class Gis:
             self.edge_selections = minSpanTreeEdges
             self.__dijkstrasAlgorithm(sourceCity, destCity)
             self.edge_selections = edgeSelectionsCopy
-            self.makeGraph()
 
     # Print n most populated cities
     def printPopulatedStates(self, numStates=50):

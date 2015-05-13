@@ -23,52 +23,7 @@
     <favorites_list name="CS213 - GIS" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Gis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-              <folding>
-                <element signature="e#235#1491#0" expanded="false" />
-                <element signature="e#1578#1948#0" expanded="false" />
-                <element signature="e#2050#2202#0" expanded="false" />
-                <element signature="e#2337#3542#0" expanded="false" />
-                <element signature="e#3611#3684#0" expanded="false" />
-                <element signature="e#3753#3781#0" expanded="false" />
-                <element signature="e#3904#4145#0" expanded="false" />
-                <element signature="e#4259#5079#0" expanded="false" />
-                <element signature="e#5180#6025#0" expanded="false" />
-                <element signature="e#6098#6170#0" expanded="false" />
-                <element signature="e#6238#6266#0" expanded="false" />
-                <element signature="e#6388#7160#0" expanded="false" />
-                <element signature="e#7294#8174#0" expanded="false" />
-                <element signature="e#8245#8317#0" expanded="false" />
-                <element signature="e#8378#9991#0" expanded="false" />
-                <element signature="e#10144#12595#0" expanded="false" />
-                <element signature="e#12699#15260#0" expanded="false" />
-                <element signature="e#15351#15978#0" expanded="false" />
-                <element signature="e#16108#16614#0" expanded="false" />
-                <element signature="e#16796#17081#0" expanded="false" />
-                <element signature="e#17185#17334#0" expanded="false" />
-                <element signature="e#17453#17585#0" expanded="false" />
-                <element signature="e#17713#19680#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06137184" vertical-offset="0" max-vertical-offset="1224">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -78,14 +33,15 @@
         <option value="$PROJECT_DIR$/gis test.dat" />
         <option value="$PROJECT_DIR$/City.py" />
         <option value="$PROJECT_DIR$/Edge.py" />
-        <option value="$PROJECT_DIR$/client1.py" />
-        <option value="$PROJECT_DIR$/client2.py" />
-        <option value="$PROJECT_DIR$/client3.py" />
         <option value="$PROJECT_DIR$/../client1.py" />
         <option value="$PROJECT_DIR$/../client2.py" />
         <option value="$PROJECT_DIR$/../client3.py" />
         <option value="$PROJECT_DIR$/GIS.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/client1.py" />
+        <option value="$PROJECT_DIR$/client2.py" />
+        <option value="$PROJECT_DIR$/Gis.py" />
+        <option value="$PROJECT_DIR$/client3.py" />
       </list>
     </option>
   </component>
@@ -118,7 +74,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -139,6 +94,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -163,64 +119,7 @@
       <recent name="C:\Users\Administrator\Documents\PycharmProjects\CS213 - GIS" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Main">
-    <configuration default="false" name="client1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="CS213 - GIS" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../client1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="client2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="CS213 - GIS" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../client2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="client3 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="CS213 - GIS" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../client3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.client3">
     <configuration default="false" name="GIS" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -253,6 +152,63 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="CS213 - GIS" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="client1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS213 - GIS" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="client2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS213 - GIS" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="client3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS213 - GIS" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PyDebugRunner" />
@@ -382,19 +338,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.client1 (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python.client2 (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.client3 (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.GIS" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Main" />
+      <item index="0" class="java.lang.String" itemvalue="Python.GIS" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Main" />
+      <item index="2" class="java.lang.String" itemvalue="Python.client1" />
+      <item index="3" class="java.lang.String" itemvalue="Python.client2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.client3" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.GIS" />
-        <item index="2" class="java.lang.String" itemvalue="Python.client3 (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.client2 (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.client1 (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.client3" />
+        <item index="1" class="java.lang.String" itemvalue="Python.client2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.client1" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Main" />
+        <item index="4" class="java.lang.String" itemvalue="Python.GIS" />
       </list>
     </recent_temporary>
   </component>
@@ -413,10 +369,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2981771" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -426,7 +382,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496474" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2421875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.390625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -469,59 +425,11 @@
           <option name="timeStamp" value="325" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="344" />
+      <option name="time" value="348" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gis.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="11985">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6528">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#235#1491#0" expanded="false" />
-            <element signature="e#1578#1948#0" expanded="false" />
-            <element signature="e#2050#2202#0" expanded="false" />
-            <element signature="e#2337#3542#0" expanded="false" />
-            <element signature="e#3611#3684#0" expanded="false" />
-            <element signature="e#3753#3781#0" expanded="false" />
-            <element signature="e#3904#4145#0" expanded="false" />
-            <element signature="e#4259#5079#0" expanded="false" />
-            <element signature="e#5180#6025#0" expanded="false" />
-            <element signature="e#6098#6170#0" expanded="false" />
-            <element signature="e#6238#6266#0" expanded="false" />
-            <element signature="e#6388#7160#0" expanded="false" />
-            <element signature="e#7294#8174#0" expanded="false" />
-            <element signature="e#8245#8317#0" expanded="false" />
-            <element signature="e#8378#9991#0" expanded="false" />
-            <element signature="e#10144#12595#0" expanded="false" />
-            <element signature="e#12699#15260#0" expanded="false" />
-            <element signature="e#15351#15978#0" expanded="false" />
-            <element signature="e#16108#16614#0" expanded="false" />
-            <element signature="e#16796#17081#0" expanded="false" />
-            <element signature="e#17185#17334#0" expanded="false" />
-            <element signature="e#17453#17585#0" expanded="false" />
-            <element signature="e#17713#19680#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gis.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="11985">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gis.dat">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6630" max-vertical-offset="11985">
@@ -767,13 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_pluginbase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28783783" vertical-offset="7403" max-vertical-offset="8143">
-          <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Python34/Lib/site-packages/networkx/drawing/nx_pylab.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="16864">
@@ -820,7 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27567568" vertical-offset="0" max-vertical-offset="740">
           <caret line="12" column="65" selection-start-line="12" selection-start-column="65" selection-end-line="12" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -828,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5216606" vertical-offset="0" max-vertical-offset="554">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -836,7 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11985">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -844,14 +742,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
           <caret line="0" column="29" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1224">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1428">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_pluginbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3319672" vertical-offset="7454" max-vertical-offset="8143">
+          <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3318182" vertical-offset="41" max-vertical-offset="493">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77272725" vertical-offset="0" max-vertical-offset="697">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.16818182" vertical-offset="1915" max-vertical-offset="2397">
+          <caret line="387" column="53" selection-start-line="387" selection-start-column="53" selection-end-line="387" selection-end-column="53" />
           <folding>
             <element signature="e#235#1491#0" expanded="false" />
             <element signature="e#1578#1948#0" expanded="false" />
@@ -869,22 +806,13 @@
             <element signature="e#8245#8317#0" expanded="false" />
             <element signature="e#8378#9991#0" expanded="false" />
             <element signature="e#10144#12595#0" expanded="false" />
-            <element signature="e#12699#15260#0" expanded="false" />
-            <element signature="e#15351#15978#0" expanded="false" />
-            <element signature="e#16108#16614#0" expanded="false" />
-            <element signature="e#16796#17081#0" expanded="false" />
-            <element signature="e#17185#17334#0" expanded="false" />
-            <element signature="e#17453#17585#0" expanded="false" />
-            <element signature="e#17713#19680#0" expanded="false" />
+            <element signature="e#15322#15949#0" expanded="false" />
+            <element signature="e#16079#16585#0" expanded="false" />
+            <element signature="e#16767#17052#0" expanded="false" />
+            <element signature="e#17156#17305#0" expanded="false" />
+            <element signature="e#17424#17556#0" expanded="false" />
+            <element signature="e#17684#19651#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06137184" vertical-offset="0" max-vertical-offset="1224">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
